@@ -54,9 +54,14 @@ function getCurrentTabUrl(callback) {
  */
 function changeBackgroundColor(color) {
   var script = 'document.body.style.backgroundColor="' + color + '";';
-  // var script = 'var h1 = document.getElementsByTagName("h1");
-  //   console.log(h1);'
-  chrome.tabs.executeScript(null, {file: "content_script.js"});
+  // See https://developer.chrome.com/extensions/tabs#method-executeScript.
+  // chrome.tabs.executeScript allows us to programmatically inject JavaScript
+  // into a page. Since we omit the optional first argument "tabId", the script
+  // is inserted into the active tab of the current window, which serves as the
+  // default.
+  chrome.tabs.executeScript({
+    code: script
+  });
 }
 
 /**

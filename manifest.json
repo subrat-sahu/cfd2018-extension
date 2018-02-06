@@ -8,6 +8,18 @@
     },
   "permissions": [
     "activeTab",
-    "storage"
-  ] 
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["myscript.js"]
+    }
+  ]
 }
