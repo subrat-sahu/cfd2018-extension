@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+	<style type="text/css">
+		body {
+			background-color: #fffaf0;
+			font-family: 'Ubuntu';
+		}
+	</style>
+</head>
+<body>
+	<div id="wrapper" class="container">
+		<div id="top" style="text-align: center;">
+			<h3>StackOverFlow</h3> 
+			<span id="search"></span>
+		</div>
+		<div id="stack">
+			
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		const ROOT_URL = 'http://127.0.0.1:8000/search/'
+		var recv;
+		var obj;
+		var stack = 'buffer overflow';
+
+		function search(s) {
+			let request = new XMLHttpRequest();
+			request.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					recv = this.responseText;
+					//obj = JSON.parse(recv);
+					//addStack();
+					console.log(recv);
+					document.getElementById("search").innerHTML = stack;
+				}
+			}
+			request.open("GET", ROOT_URL+s, true);
+			request.send();
+		}
+
+		search(encodeURI(stack));
+
+		function addStack() {
+
+			var stackDiv = document.getElementById("stack");
+			for (i=0;i<obj.length;i++) {
+				var div0 = document.createElement("div");
+				div0.classList.add("card-panel");
+			
+				var div00 = document.createElement("div");
+				div00.classList.add("row");
+			
+				var div000 = document.createElement("div");
+				div000.classList.add("col");
+				div000.classList.add("s4");
+
+				var p1 = document.createElement("p");
+				p1.innerHTML = obj[i].votes + " votes";
+
+				var p2 = document.createElement("p");
+				p2.innerHTML = obj[i].answers + " answers";
+
+				var div001 = document.createElement("div");
+				div001.classList.add("col");
+				div001.classList.add("s8");
+
+				var p3 = document.createElement("p");
+
+				var a = document.createElement("a");
+				a.setAttribute("href", obj[i].question_url);
+				a.innerHTML = obj[i].question;
+
+				var p4 = document.createElement("p");
+				p4.innerHTML = obj[i].description;
+
+				stackDiv.appendChild(div0);
+				div0.appendChild(div00);
+				div00.appendChild(div000);
+				div000.appendChild(p1);
+				div000.appendChild(p2);
+				div00.appendChild(div001);
+				div001.appendChild(p3);
+				p3.appendChild(a);
+				div001.appendChild(p4);
+			}
+		}
+	</script>
+</body>
+</html>

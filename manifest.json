@@ -1,5 +1,25 @@
 {
-"manifest_version":2,
-"name": "particle",
-"version": "0.1
+  "manifest_version":2,
+  "name": "particle",
+  "version": "0.1",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+    },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["myscript.js"]
+    }
+  ]
 }
