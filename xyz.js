@@ -1,30 +1,21 @@
 const ROOT_URL = 'https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=';
 var recv;
 var obj;
-var search = '';
+var search = ['fifa','politics','flood','movies'];
 
-function bingNewsSearch(query) {
-	
-	let request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			recv = this.responseText;
-			obj = JSON.parse(recv);
-			addNews();
-			document.getElementById("search").innerHTML = search;
-		}
-	}
-	request.open("GET", ROOT_URL+query, true);
-	request.setRequestHeader('Ocp-Apim-Subscription-Key','248fdd6665c5432294922d48e0ec5b3f');
-	request.send();
-}
-bingNewsSearch(encodeURI(search));
+//bingNewsSearch(encodeURI(search));
 
-function addNews() {
+function addNews(s) {
 
 	var newsdiv = document.getElementById("news");
-	for (i=0; i<obj.value.length; i++) {
+	for (i=0; i<5; i++) {
 		try {
+
+			var div = document.createElement("div");
+
+			var head = document.createElement("h5");
+			head.innerHTML = s;
+
 			var div0 = document.createElement("div");
 			div0.classList.add("card-panel");
 			
@@ -55,7 +46,9 @@ function addNews() {
 			var p1 = document.createElement("p");
 			a.innerHTML = "Read More..";
 			
-			newsdiv.appendChild(div0);
+			newsdiv.appendChild(div);
+			div.appendChild(head);
+			div.appendChild(div0);
 			div0.appendChild(div00);
 			div00.appendChild(div000);
 			div000.appendChild(img);
@@ -70,3 +63,23 @@ function addNews() {
 		}
 	}
 }
+
+function addNEWS(search) {
+	var newsdiv = document.getElementById("news");
+	for (let i=0;i<search.length;i++) {
+		console.log(search[i]);
+		let request = new XMLHttpRequest();
+		request.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				recv = this.responseText;
+				obj = JSON.parse(recv);
+				addNews(search[i]);
+			}
+		}
+		request.open("GET", ROOT_URL+search[i], true);
+		request.setRequestHeader('Ocp-Apim-Subscription-Key','248fdd6665c5432294922d48e0ec5b3f');
+		request.send();
+	}
+}
+
+addNEWS(search);
