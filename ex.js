@@ -21,7 +21,7 @@ bingNewsSearch();
 function addNews() {
 
 	var newsdiv = document.getElementById("news");
-	for (i=0; i<1; i++) {
+	for (i=0; i<2; i++) {
 		try {
 			var div0 = document.createElement("div");
 			div0.classList.add("card-panel");

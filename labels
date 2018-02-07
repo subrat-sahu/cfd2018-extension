@@ -1,0 +1,12 @@
+module.exports = [
+['cricket','t20','test-match'],
+['politics'],
+['indian-politics','bjp','aap','congress','ministers','parliament'],
+['artificial-intelligence','machine-learning'],
+['anime','cartoon','ninja hatori'],
+['bollywood','iifa','tollywood','glamour','actress','miss india','horror'],
+['hollywood'],
+['hacking','infosec','black-hat','grey-hat','white-hat'],
+['development','web','python','nodejs'],
+['computer-science']
+]
