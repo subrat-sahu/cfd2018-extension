@@ -174,7 +174,7 @@ var SendData = (dataParam) => {
      finalRatingArray: finalRatingArray
   };
   var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-  xhr.open('POST', 'http://localhost:4000/api/testing/');
+  xhr.open('POST', 'https://ancient-lake-56857.herokuapp.com/record');
   xhr.onreadystatechange = function() {
       if (xhr.readyState > 3 && xhr.status==200) {
         saveChanges({
