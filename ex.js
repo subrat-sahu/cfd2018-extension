@@ -1,9 +1,8 @@
-const ROOT_URL = 'https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=';
+const ROOT_URL = 'https://api.cognitive.microsoft.com/bing/v7.0/news/';
 var recv;
 var obj;
-var search = '';
 
-function bingNewsSearch(query) {
+function bingNewsSearch() {
 	
 	let request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
@@ -11,19 +10,18 @@ function bingNewsSearch(query) {
 			recv = this.responseText;
 			obj = JSON.parse(recv);
 			addNews();
-			document.getElementById("search").innerHTML = search;
 		}
 	}
-	request.open("GET", ROOT_URL+query, true);
+	request.open("GET", ROOT_URL, true);
 	request.setRequestHeader('Ocp-Apim-Subscription-Key','248fdd6665c5432294922d48e0ec5b3f');
 	request.send();
 }
-bingNewsSearch(encodeURI(search));
+bingNewsSearch();
 
 function addNews() {
 
 	var newsdiv = document.getElementById("news");
-	for (i=0; i<obj.value.length; i++) {
+	for (i=0; i<1; i++) {
 		try {
 			var div0 = document.createElement("div");
 			div0.classList.add("card-panel");
@@ -43,25 +41,24 @@ function addNews() {
 			div001.classList.add("col");
 			div001.classList.add("s8");
 			
-			var h4 = document.createElement("h5");
-			h4.innerHTML = obj.value[i].name;
-			
-			var p = document.createElement("p");
-			p.innerHTML = obj.value[i].description;
+			var h6 = document.createElement("h6");
+			h6.innerHTML = obj.value[i].name;
 			
 			var a = document.createElement("a");
 			a.setAttribute("href", obj.value[i].url);
 			
 			var p1 = document.createElement("p");
 			a.innerHTML = "Read More..";
+			a.addEventListener("click", function() {
+				window.open(obj.value[i].url, '_blank');
+			});
 			
 			newsdiv.appendChild(div0);
 			div0.appendChild(div00);
 			div00.appendChild(div000);
 			div000.appendChild(img);
 			div00.appendChild(div001);
-			div001.appendChild(h4);
-			div001.appendChild(p);
+			div001.appendChild(h6);
 			div001.appendChild(p1);
 			p1.appendChild(a);
 		}
@@ -70,3 +67,7 @@ function addNews() {
 		}
 	}
 }
+
+document.getElementById("showmore").addEventListener("click", function() {
+	window.open('bing.html','_blank');
+});
