@@ -1,0 +1,8 @@
+{
+	"body":{
+	"topic":"string",
+	"rating":"int",
+	"text":"string",
+	"url":"string"
+}
+}
